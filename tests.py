@@ -9,18 +9,28 @@ class TestInit(unittest.TestCase):
   def test_default(self):
     # pass #will the 0 argument version of the constructor produce the correct fraction?
     a = Fraction()s
-    self.assertEqual(a, '0/1')
+    self.assertEqual(a.numerator, 0)
+    self.assertEqual(a.denominator, 1)
   def test_oneArg(self):
     # pass #will the 1 argument version of the constructor produce the correct fraction?
     a = Fraction(6)
-    self.assertEqual(a, 6)
+    self.assertEqual(a.numerator, 6)
+    self.assertEqual(a.denominator, 1)
   def test_twoArg(self):
-    pass #will the 2 argument version of the constructor produce the correct fraction?
+    # pass #will the 2 argument version of the constructor produce the correct fraction?
+    a = Fraction(6,5)
+    self.assertEqual(a.numerator, 6)
+    self.assertEqual(a.denominator, 5)
   def test_invalidArg(self):
-    pass #will constructor through an exception if non-numeric data is passed?
+    # pass #will constructor through an exception if non-numeric data is passed?
+    with self.assertRises(InvalidArgumentError, msg="must take int variables")
+      a = Fraction(3.5)
   def test_reduced(self):
-    pass #if the inputs share a factor, is the fraction reduced? i.e. 2/4 = 1/2
-
+    # pass #if the inputs share a factor, is the fraction reduced? i.e. 2/4 = 1/2
+    a = Fraciton(4, 2)
+    self.assertEqual(a.numerator, 2)
+    self.assertEqual(a.denominator, 1)
+    
 class TestStr(unittest.TestCase):
   def test_displayfraction(self):
     a = Fraction(1,2)
