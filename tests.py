@@ -36,7 +36,12 @@ class TestStr(unittest.TestCase):
     a = Fraction(1,2)
     self.assertEqual(" 1/2 ",a.__str__())
   def test_displayInt(self):
-    pass #if the denominator is 1, does display omit the /1?
+    # pass #if the denominator is 1, does display omit the /1?
+    a = Fraction(5,1)
+    self.assertEqual(" 5 ", a.__str__())
   def test_displayNeg(self):
-    pass #if the fraction is negative, is it possible to erroneously have it display 1/-2, vs -1/2?
-    
+    # pass #if the fraction is negative, is it possible to erroneously have it display 1/-2, vs -1/2?
+    a = Fraction(-1,2)
+    b = Fraction(1,-2)
+    self.assertEqual(" -1/2 ", a.__str__())
+    self.assertEqual(" -1/2 ", b.__str__())
