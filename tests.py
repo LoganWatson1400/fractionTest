@@ -45,3 +45,8 @@ class TestStr(unittest.TestCase):
     b = Fraction(1,-2)
     self.assertEqual(" -1/2 ", a.__str__())
     self.assertEqual(" -1/2 ", b.__str__())
+class TestFloat(unittest.TestCase):
+class TestAdd(unittest.TestCase):
+class TestSub(unittest.TestCase):
+class TestMult(unittest.TestCase):
+class TestDiv(unittest.TestCase):
