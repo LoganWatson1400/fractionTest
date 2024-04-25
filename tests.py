@@ -39,9 +39,15 @@ class TestInit(unittest.TestCase):
 
 
 class TestStr(unittest.TestCase):
+    
+    def setUp(self):
+        self.f0 = Fraction()
+        self.f1 = Fraction(1,2)
+        self.f2 = Fraction(-1,2)
+    
     def test_displayFraction(self):
-        a = Fraction(1, 2)
-        self.assertEqual(" 1/2 ", a.__str__())
+        
+        self.assertEqual(" 1/2 ", self.f1.__str__())
 
     def test_displayInt(self):
         # pass #if the denominator is 1, does display omit the /1?
@@ -50,65 +56,69 @@ class TestStr(unittest.TestCase):
 
     def test_displayNeg(self):
         # pass #if the fraction is negative, is it possible to erroneously have it display 1/-2, vs -1/2?
-        a = Fraction(-1, 2)
-        b = Fraction(1, -2)
-        self.assertEqual(" -1/2 ", a.__str__())
-        self.assertEqual(" -1/2 ", b.__str__())
+        self.assertEqual(" -1/2 ", self.f2.__str__())
+        self.assertEqual(" -1/2 ", self.f2.__str__())
 
 
 class TestFloat(unittest.TestCase):
+    
+    def setUp(self):
+        self.f0 = Fraction()
+        self.f1 = Fraction(1,2)
+        self.f2 = Fraction(-1,2)
+        
     def test_displayFloat(self):
-        a = Fraction(1, 2)
-        self.assertEqual(0.5, a.__str__())
+        
+        self.assertEqual(0.5, self.f1.__str__())
 
     def test_displayNeg(self):
         a = Fraction(-1, 2)
-        self.assertEqual(-0.5, a.__str__())
+        self.assertEqual(-0.5, self.f2.__str__())
 
 
 class TestAdd(unittest.TestCase):
 
+    def setUp(self):
+        self.f0 = Fraction()
+        self.f1 = Fraction(1,2)
+        self.f2 = Fraction(-1,2)
+        self.f3 = Fraction(1,1)
+        
     def test_invalidType(self):
-        a = Fraction(1, 2)
+        
         with self.assertRaises(TypeError, msg="must take Fraction Objects"):
-            a.__add__("no, just no")
+            self.f0.__add__("no, just no")
 
     def test_add(self):
-        a = Fraction(1, 2)
-        b = Fraction(1, 2)
-        c = Fraction(1, 1)
-        self.assertEqual(c, a.__add__(b))
+        self.assertEqual(self.f3, self.f1.__add__(self.f1))
 
     def test_addZero(self):
-        a = Fraction(1, 2)
-        b = Fraction()
-        self.assertEqual(a, a.__add__(b))
+        self.assertEqual(self.f1, self.f1.__add__(self.f0))
 
     def test_addNeg(self):
-        a = Fraction(1, 2)
-        b = Fraction(-1, 2)
-        c = Fraction()
-        self.assertEqual(c, a.__add__(b))
+        self.assertEqual(self.f0, self.f1.__add__(self.f2))
 
 
 class TestSub(unittest.TestCase):
 
+    def setUp(self):
+        self.f0 = Fraction()
+        self.f1 = Fraction(1,2)
+        self.f2 = Fraction(-1,2)
+        
     def test_invalidType(self):
-        a = Fraction(1, 2)
+        
         with self.assertRaises(TypeError, msg="must take Fraction Objects"):
-            a.__sub__("no, just no")
+            self.f0.__sub__("no, just no")
 
     def test_sub(self):
-        a = Fraction(1, 2)
-        b = Fraction(1, 2)
-        c = Fraction(0, 1)
-        self.assertEqual(c, a.__sub__(b))
+        self.assertEqual(self.f0, self.f1.__sub__(self.f1))
 
 
 class TestMult(unittest.TestCase):
 
     def test_invalidType(self):
-        a = Fraction(1, 2)
+        a = Fraction()
         with self.assertRaises(TypeError, msg="must take Fraction Objects"):
             a.__mul__("no, just no")
 
